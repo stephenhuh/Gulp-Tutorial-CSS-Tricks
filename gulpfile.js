@@ -2,6 +2,10 @@ var gulp = require('gulp');
 //require the gulp-sass plugin
 var sass = require('gulp-sass');
 
+//create an unnamed instance of browserSync
+//see: https://browsersync.io/docs/api#api-create
+var browserSync = require('browser-sync').create();
+
 //first test function
 gulp.task('hello', function(){
 	console.log('Hello Zell!');
@@ -30,8 +34,8 @@ gulp.task('sass-v2', function(){
 
 //basic syntax
 
-//gulp.watch('files-to-watch', ['tasks', 'to', 'run']);
-//gulp.watch('app/scss/**/*.scss', ['sass']);
+gulp.watch('files-to-watch', ['tasks', 'to', 'run']);
+gulp.watch('app/scss/**/*.scss', ['sass-v2']);
 
 
 //watch more than one file type
@@ -40,11 +44,39 @@ gulp.task('watch', function(){
 });
 
 
+//browsersync
+gulp.task('browserSync', function(){
+	browserSync.init({
+		server: {
+			baseDir: 'app'
+		},
+	});
+});
 
 
+//sass for browsersync
+gulp.task('sass-v3', function(){
+	return gulp.src('app/scss/**/*.scss')
+		.pipe(sass()) //convert SASS to CSS with gulp-sass
+		.pipe(gulp.dest('app/css'))
+		.pipe(browserSync.reload({ //reload the browser for ya
+			stream: true
+		}));
+});
 
 
+//watch with browsersync 
+//-- create a task watchv2 that initializes browsersync 
+//-- before watching the scss files 
+gulp.task('watch-v2', ['browserSync'], function(){
+	gulp.watch('app/scss/**/*.scss', ['sass-v3']);
+});
 
 
-
+//add watch and reload on other files - notice that you can pass a function into the watch task
+gulp.task('watch-v3', ['browserSync'], function(){
+	gulp.watch('app/scss/**/*.scss', ['sass-v3']);
+	gulp.watch('app/*.html', browserSync.reload);
+	gulp.watch('app/js/**/*.css', browserSync.reload);
+});
 
