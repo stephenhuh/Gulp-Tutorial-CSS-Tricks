@@ -5,6 +5,8 @@ var sass = require('gulp-sass');
 //see: https://browsersync.io/docs/api#api-create
 var browserSync = require('browser-sync').create();
 var useref = require('gulp-useref');
+var uglify = require('gulp-uglify');
+var gulpIf = require('gulp-if');
 
 //first test function
 gulp.task('hello', function(){
@@ -84,5 +86,13 @@ gulp.task('watch-v3', ['browserSync', 'sass-v3'], function(){
 gulp.task('useref', function(){
 	return gulp.src('app/*.html')
 		.pipe(useref())
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('useref-v2', function(){
+	return gulp.src('app/*.html')
+		.pipe(useref())
+		//minifies only if a JS file
+		.pipe(gulpIf('*.js', uglify()))
 		.pipe(gulp.dest('dist'));
 });
