@@ -74,7 +74,7 @@ gulp.task('watch-v2', ['browserSync'], function(){
 
 
 //add watch and reload on other files - notice that you can pass a function into the watch task
-gulp.task('watch-v3', ['browserSync'], function(){
+gulp.task('watch-v3', ['browserSync', 'sass-v3'], function(){
 	gulp.watch('app/scss/**/*.scss', ['sass-v3']);
 	gulp.watch('app/*.html', browserSync.reload);
 	gulp.watch('app/js/**/*.css', browserSync.reload);
