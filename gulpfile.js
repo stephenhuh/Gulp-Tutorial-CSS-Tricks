@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 //require the gulp-sass plugin
 var sass = require('gulp-sass');
-
 //create an unnamed instance of browserSync
 //see: https://browsersync.io/docs/api#api-create
 var browserSync = require('browser-sync').create();
+var useref = require('gulp-useref');
 
 //first test function
 gulp.task('hello', function(){
@@ -80,3 +80,9 @@ gulp.task('watch-v3', ['browserSync', 'sass-v3'], function(){
 	gulp.watch('app/js/**/*.css', browserSync.reload);
 });
 
+
+gulp.task('useref', function(){
+	return gulp.src('app/*.html')
+		.pipe(useref())
+		.pipe(gulp.dest('dist'));
+});

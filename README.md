@@ -4,6 +4,8 @@
 3. [Browsersync](https://browsersync.io/)  
 4. [Wikipedia on Globs](https://en.wikipedia.org/wiki/Glob_(programming))
 5. [NPM](https://docs.npmjs.com)
+6. [useref](hhttps://www.npmjs.com/package/gulp-useref)
+7. [stackoverflow](http://stackoverflow.com/questions/21699146/gulp-js-task-return-on-src)
 
 #Points
 * What IS gulp and what problems does it attempt to solve?
@@ -14,6 +16,9 @@
 * +(A|B) significance in globbing?
 * How to exclude files from globbing?
 * Difference between globbing and regexes?
+* What does useref do?
+* What does browsersync do?
+* Why return on gulp.src?
 
 #Notes
 ##What is Gulp
@@ -60,6 +65,7 @@ In computer programming, in particular in a Unix-like environment, glob patterns
 $npm install --save-dev used to save to devdependencies in package.json as opposed to --save which goes directly to dependencies
 peer dependencies:
 They tell NPM 'I need this package, but I need the version that is part of the project, not some version private to my module'. When NPM sees that your package is being installed into a project that does not have that dependency, or that has an incompatible version of it, it will warn the user during the installation process.
+
 #Where to go:
 Learn more about Node streams
  
